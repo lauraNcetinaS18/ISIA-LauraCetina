@@ -1,0 +1,63 @@
+[
+  {
+    "id": "INC-1001",
+    "reporter": "carlos.mendoza@clientes-corp.com",
+    "created_at": "2026-11-05T08:15:00",
+    "raw_text": "URGENTE: El gateway de pagos devuelve HTTP 502 Bad Gateway en todas las transacciones con tarjeta de crédito desde hace 12 minutos. Ningún comercio puede cobrar."
+  },
+  {
+    "id": "INC-1002",
+    "reporter": "ana.gomez@clientes-corp.com",
+    "created_at": "2026-11-05T09:10:00",
+    "raw_text": "He intentado ingresar a mi cuenta tres veces y ahora aparece bloqueada. Necesito acceder hoy mismo porque debo enviar el informe de cierre a la junta directiva."
+  },
+  {
+    "id": "INC-1003",
+    "reporter": "soporte-nivel1@incidentops.internal",
+    "created_at": "2026-11-05T10:05:00",
+    "raw_text": "El dashboard de reportes históricos tarda cerca de 4.5 segundos en cargar cuando un cliente tiene más de 10,000 órdenes registradas. No da error, pero la experiencia es muy lenta."
+  },
+  {
+    "id": "INC-1004",
+    "reporter": "luis.torres@logistica-express.co",
+    "created_at": "2026-11-05T11:20:00",
+    "raw_text": "Sería excelente si pudieran cambiar el color del botón de exportar CSV a verde oscuro porque el gris actual casi no resalta en mi monitor secundario."
+  },
+  {
+    "id": "INC-1005",
+    "reporter": "alertas-monitoreo@incidentops.internal",
+    "created_at": "2026-11-05T11:45:00",
+    "raw_text": "El nodo primario de PostgreSQL muestra un uso de conexiones del 94% y timeouts intermitentes en el pool de conexiones del servicio de facturación."
+  },
+  {
+    "id": "INC-1006",
+    "reporter": "maria.rodriguez@retail-latam.com",
+    "created_at": "2026-11-05T13:00:00",
+    "raw_text": "Otra vez cayó la pasarela de cobros con tarjeta, a nuestros clientes les sale error 502 al intentar pagar el carrito de compras."
+  },
+  {
+    "id": "INC-1007",
+    "reporter": "auditoria@seguridad-fin.com",
+    "created_at": "2026-11-05T14:30:00",
+    "raw_text": "Detectamos que al cambiar el parámetro company_id en la URL del reporte PDF se pueden visualizar facturas pertenecientes a otra organización."
+  },
+  {
+    "id": "INC-1008",
+    "reporter": "pedro.sanchez@ventas-norte.com",
+    "created_at": "2026-11-05T15:10:00",
+    "raw_text": "El listado de planes e historial tarda más de 3 segundos en responder cada vez que abrimos la pestaña de clientes corporativos con más de 10,000 registros."
+  },
+  {
+    "id": "INC-1009",
+    "reporter": "elena.vargas@contabilidad-global.com",
+    "created_at": "2026-11-05T16:40:00",
+    "raw_text": "La exportación mensual a Excel se queda pensando unos 20 segundos pero al final sí descarga el archivo completo. Hoy tenemos cierre contable y nos preocupa que falle más tarde."
+  },
+  {
+    "id": "INC-1010",
+    "reporter": "devops-ci@incidentops.internal",
+    "created_at": "2026-11-05T17:25:00",
+    "raw_text": "El certificado TLS del entorno de staging vencerá en 14 días. Requiere rotación programada antes del próximo sprint."
+  }
+]
+
