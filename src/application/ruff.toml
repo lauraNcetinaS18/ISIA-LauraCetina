@@ -1,0 +1,9 @@
+extend = "../../pyproject.toml"
+
+[lint.flake8-tidy-imports.banned-api]
+"fastapi".msg = "La aplicación no importa frameworks HTTP."
+"pydantic".msg = "La aplicación no importa frameworks de validación."
+"typer".msg = "La aplicación no importa frameworks de CLI."
+"sqlite3".msg = "La aplicación no importa motores de base de datos."
+"sqlalchemy".msg = "La aplicación no importa ORMs."
+"src.adapters".msg = "La aplicación no conoce adaptadores concretos."

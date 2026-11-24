@@ -1,0 +1,6 @@
+extend = "../../../pyproject.toml"
+
+[lint.flake8-tidy-imports.banned-api]
+"sqlite3".msg = "Usa src.adapters.outbound.factory; no importes drivers."
+"sqlalchemy".msg = "Usa src.adapters.outbound.factory; no importes ORMs."
+"src.incident_repository".msg = "Usa src.adapters.outbound.factory."

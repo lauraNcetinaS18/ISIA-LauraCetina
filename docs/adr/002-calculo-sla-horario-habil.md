@@ -97,6 +97,6 @@ stateDiagram-v2
   dependencias nuevas; algoritmo O(D) y determinista.
 - **Negativas / Trade-offs**: no contempla festivos ni múltiples zonas horarias (mejora futura,
   posible ADR-003); asume la ventana fija 08:00–18:00 en la zona horaria del servidor.
-- **Verificación**: `uv run python -m src.sla_calculator` ejecuta 6 casos borde deterministas
+- **Verificación**: `uv run python -m src.domain.sla_calculator` ejecuta 6 casos borde deterministas
   (viernes fuera de horario, creación en sábado, cruce de dos fines de semana, 24/7 vs. hábil,
   y un caso RESUELTO sin escalar) y todos deben imprimir `OK` / `TODOS LOS CASOS PASAN`.

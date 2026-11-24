@@ -1,0 +1,12 @@
+extend = "../../pyproject.toml"
+
+[lint.flake8-tidy-imports.banned-api]
+"fastapi".msg = "El dominio no importa frameworks HTTP."
+"pydantic".msg = "El dominio no importa frameworks de validación."
+"typer".msg = "El dominio no importa frameworks de CLI."
+"httpx".msg = "El dominio no importa clientes HTTP."
+"requests".msg = "El dominio no importa clientes HTTP."
+"sqlite3".msg = "El dominio no importa bases de datos."
+"sqlalchemy".msg = "El dominio no importa ORMs."
+"src.application".msg = "Las dependencias apuntan hacia el dominio."
+"src.adapters".msg = "El dominio no conoce adaptadores."

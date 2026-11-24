@@ -5,9 +5,30 @@ description = "Proyecto semilla IncidentOps para Semana 1 de Ingeniería de Soft
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
+    "fastapi>=0.162.5",
+    "pydantic>=2",
     "tiktoken>=0.8.0",
+    "typer>=0.29.1",
+    "uvicorn>=0.54.0",
 ]
 
 [tool.uv]
 package = false
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.1",
+    "pytest>=9.2.0",
+    "ruff>=0.17.6",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "TID"]
+
+[tool.ruff.lint.flake8-tidy-imports]
+ban-relative-imports = "parents"
 

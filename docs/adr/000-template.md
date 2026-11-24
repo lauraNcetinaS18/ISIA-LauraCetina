@@ -1,47 +1,49 @@
 # ADR-000: [Título Corto de la Decisión Arquitectónica]
 
-- **Estado**: Propuesto | Aceptado | Reemplazado
+- **Estado**: Propuesto | Aceptado | Reemplazado por ADR-XXX
 - **Fecha**: YYYY-MM-DD
 - **Autor(es)**: [Nombre del Ingeniero / Equipo]
-- **Componentes Afectados**: [`src/...`]
+- **Reemplaza a**: (Opcional: ADR-XXX)
 
 ---
 
 ## 1. Contexto y Problema
 
-Describe el problema técnico o de negocio actual, las limitaciones del código existente (por ejemplo, latencia, consultas N+1, errores de cálculo de SLA o limitaciones de escalabilidad) y las restricciones del sistema (p. ej., mantener cero dependencias externas, seguridad contra inyección SQL, determinismo).
+Describe una sola decisión arquitectónica estructural y difícil de revertir, el contexto que la motiva y las restricciones vigentes. No dupliques requisitos funcionales de `spec.md` ni tareas de implementación.
 
 ---
 
 ## 2. Opciones Consideradas
 
-1. **Opción A — [Nombre de la opción]**:
-   - *Ventajas*: ...
-   - *Desventajas*: ...
-2. **Opción B — [Nombre de la opción]**:
-   - *Ventajas*: ...
-   - *Desventajas*: ...
-3. **Opción C — [Nombre de la opción]**:
-   - *Ventajas*: ...
-   - *Desventajas*: ...
+1. **Opción A — [Nombre]**
+   - Ventajas: ...
+   - Desventajas: ...
+
+2. **Opción B — [Nombre]**
+   - Ventajas: ...
+   - Desventajas: ...
 
 ---
 
 ## 3. Decisión Arquitectónica
 
-Explica claramente cuál opción fue elegida y **por qué**. Incluye un diagrama **Mermaid** (`flowchart TD`, `flowchart LR`, `sequenceDiagram` o `stateDiagram-v2`) que ilustre el diseño aprobado.
+Explica qué opción se seleccionó y por qué. Usa Mermaid únicamente para representar fronteras arquitectónicas, capas o topología de componentes.
 
 ```mermaid
 flowchart LR
-    A["Solicitud / Evento"] --> B["Componente Refactorizado"]
-    B --> C["Resultado Validado"]
+    subgraph Exterior["Mundo exterior"]
+        Cliente["Interfaz / evento"]
+    end
+    subgraph Sistema["Frontera de la decisión"]
+        Aplicacion["Capa de aplicación"]
+        Nucleo["Dominio"]
+    end
+    Cliente --> Aplicacion --> Nucleo
 ```
 
 ---
 
-## 4. Consecuencias e Impacto
+## 4. Consecuencias y Trade-offs
 
-- **Positivas**: Mejoras en rendimiento, mantenibilidad, precisión o consumo de recursos.
-- **Negativas / Trade-offs**: Complejidad adicional asumida o límites conocidos de la solución.
-- **Verificación**: Cómo se comprobará empíricamente que la implementación cumple esta decisión.
-
+- Positivas: ...
+- Negativas / Trade-offs: ...
