@@ -1,11 +1,13 @@
 <!--
 Sync Impact Report
-- Validación 2026-11-24: los tres principios solicitados ya están formalizados y son conformes
-  con `docs/constitution.md` y `docs/adr/003-arquitectura-hexagonal.md`; no hay cambios de
-  gobernanza que requieran enmienda.
-- Cambio de versión: 1.0.0 → 1.0.0 (sin cambio).
-- Principios modificados: ninguno. Se conservan I. Núcleo determinista único en `src/domain/`,
-  II. Arquitectura Hexagonal estricta y III. Gobernanza técnica y calidad (NON-NEGOTIABLE).
+- Validación 2026-11-23: los tres principios solicitados ya están formalizados y son conformes
+  con `docs/constitution.md` y `docs/adr/003-arquitectura-hexagonal.md`.
+- Enmienda 2026-11-24 (Q1, feature 003): el principio II pasa a fijar el código de salida CLI 1
+  en errores de validación de todos los subcomandos, manteniendo HTTP 422. Motivación: paridad
+  REST/CLI y aclaración aprobada en la sesión de 2026-11-24. Impacto: cambia el contrato CLI de
+  H001/H002 y sus aserciones de exit code; no cambia payloads ni reglas de dominio.
+- Cambio de versión: 1.0.0 → 2.0.0.
+- Principios modificados: II. Arquitectura Hexagonal estricta (mapeo de errores CLI).
 - Secciones agregadas: ninguna en esta revisión.
 - Secciones eliminadas: ninguna.
 - TODOs de seguimiento:
@@ -39,7 +41,7 @@ La topología aceptada en ADR-003 es obligatoria: las dependencias apuntan hacia
 
 - `src/domain/` NO DEBE importar FastAPI, Pydantic, Typer, `sqlite3` ni adaptadores; solo lo indispensable de la biblioteca estándar para reglas puras (`dataclasses`, `typing`, `datetime`).
 - `src/application/` contiene `ports.py` con puertos `typing.Protocol` y `services.py` con `IncidentService`, único orquestador de casos de uso.
-- `src/adapters/inbound/` aloja FastAPI y Typer como adaptadores delgados que validan, serializan y delegan en `IncidentService`; la estructura DEBE admitir un futuro adaptador MCP sin duplicar lógica ni modificar el servicio. Los errores de validación se mapean a HTTP 422 en REST y a código de salida 2 en CLI.
+- `src/adapters/inbound/` aloja FastAPI y Typer como adaptadores delgados que validan, serializan y delegan en `IncidentService`; la estructura DEBE admitir un futuro adaptador MCP sin duplicar lógica ni modificar el servicio. Los errores de validación se mapean a HTTP 422 en REST y a código de salida 1 en CLI, en todos los subcomandos; el mensaje de error va a `stderr`.
 - `src/adapters/outbound/` implementa los puertos de aplicación y se selecciona mediante `DATABASE_URL`. El motor inicial es SQLite3 de la biblioteca estándar; sustituirlo exige un ADR específico aprobado previamente.
 
 **Rationale:** La frontera alrededor del dominio, y no alrededor de un framework o motor, permite añadir interfaces y cambiar de persistencia sin reescribir reglas de negocio.
@@ -80,4 +82,4 @@ El versionado sigue Semantic Versioning: MAJOR para eliminación o redefinición
 
 El cumplimiento se revisa en cada pull request con las compuertas descritas; el incumplimiento DEBE corregirse antes de fusionar. Las excepciones temporales DEBEN registrarse con alcance y fecha de expiración en el registro de decisiones.
 
-**Version**: 1.0.0 | **Ratified**: 2026-11-23 | **Last Amended**: 2026-11-23
+**Version**: 2.0.0 | **Ratified**: 2026-11-23 | **Last Amended**: 2026-11-24

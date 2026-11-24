@@ -64,7 +64,7 @@ Y crear tres `ruff.toml` con `extend` relativo (`../../pyproject.toml` en `src/d
 
 ## R6. Aislamiento, reloj y paridad REST/CLI
 
-**Decision**: Cada prueba de `tests/test_spec_002_summary.py` recibirá una BD SQLite temporal mediante `DATABASE_URL` y construirá el servicio/factory dentro de la prueba. `IncidentService.get_active_incidents_summary` aceptará `reference_time: datetime | None = None`; si es `None`, usará `datetime.now()` una sola vez por petición. REST no expone `reference_time` y usa ese valor implícito; CLI expone `--reference-time` en ISO 8601 (`datetime.fromisoformat`) y un valor inválido se mapea a `ValidationError` → exit 2. Para el escenario de paridad, la prueba fijará el reloj del lado REST y pasará el mismo ISO al CLI, o sembrará datos con margen temporal suficiente y comparará la estructura completa.
+**Decision**: Cada prueba de `tests/test_spec_002_summary.py` recibirá una BD SQLite temporal mediante `DATABASE_URL` y construirá el servicio/factory dentro de la prueba. `IncidentService.get_active_incidents_summary` aceptará `reference_time: datetime | None = None`; si es `None`, usará `datetime.now()` una sola vez por petición. REST no expone `reference_time` y usa ese valor implícito; CLI expone `--reference-time` en ISO 8601 (`datetime.fromisoformat`) y un valor inválido se mapea a `ValidationError` → exit 1 (constitución 2.0.0). Para el escenario de paridad, la prueba fijará el reloj del lado REST y pasará el mismo ISO al CLI, o sembrará datos con margen temporal suficiente y comparará la estructura completa.
 
 **Rationale**: El requisito de paridad exige que ambos canales devuelvan el mismo JSON; sin un reloj controlado la comparación sería frágil. La BD temporal evita contaminar el benchmark de 10k filas.
 

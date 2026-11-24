@@ -14,6 +14,7 @@ Esta constitución define las reglas técnicas no negociables de IncidentOps. `A
 - Se adopta la topología de ADR-003: `src/domain/` con entidades y reglas puras; `src/application/` con `IncidentService` y puertos `typing.Protocol`; `src/adapters/inbound/` con API REST y CLI, preparado para un futuro adaptador MCP; `src/adapters/outbound/` con persistencia intercambiable.
 - Las dependencias apuntan hacia el dominio. El núcleo no importa FastAPI, Pydantic, Typer, `sqlite3` ni adaptadores.
 - REST y CLI son adaptadores primarios delgados: validan, serializan y delegan en `IncidentService`. Un futuro adaptador MCP debe reutilizar el mismo servicio sin duplicar lógica.
+- Los errores de validación se mapean a HTTP 422 en REST y a código de salida 1 en CLI, en todos los subcomandos; el mensaje de error va a `stderr`.
 - Los adaptadores secundarios implementan puertos definidos en aplicación. SQLite3 es el motor inicial; cambiar de motor requiere un ADR previo.
 
 ## 3. Gobernanza técnica y calidad
@@ -23,3 +24,5 @@ Esta constitución define las reglas técnicas no negociables de IncidentOps. `A
 - Persistencia con `sqlite3` de la stdlib, sin ORMs pesados. Cualquier cambio de motor de base de datos exige ADR previo.
 - Cada comportamiento se especifica en BDD (`Given / When / Then`) y cada criterio de aceptación debe tener una prueba automatizada con `pytest`.
 - Toda nueva regla de dominio entra primero con su escenario BDD y su prueba; las refactorizaciones no deben alterar los resultados deterministas existentes.
+
+**Versión**: 2.0.0 | **Ratificada**: 2026-11-23 | **Última enmienda**: 2026-11-24

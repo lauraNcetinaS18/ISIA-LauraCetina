@@ -20,7 +20,7 @@ Exponer el motor determinista de triaje como servicio HTTP y como comando de ter
   - `rationale`
   - `duplicate_group_key`
 - Validación fallida: HTTP `422 Unprocessable Entity`.
-- CLI: comando `triage` con `--incident-id` y `--raw-text`; imprime JSON válido en stdout.
+- CLI: comando `triage` con `--incident-id` y `--raw-text`; imprime JSON válido en stdout y termina con código `0` en éxito. Ante datos inválidos termina con código `1` y escribe el mensaje en `stderr`, conforme a la constitución 2.0.0.
 - Los valores esperados de los escenarios son normativos para H001.
 
 ---
@@ -59,9 +59,9 @@ No debe producir un falso positivo P0.
 
 **Given** que se envía `raw_text` compuesto solo por espacios en blanco o `incident_id` vacío.
 
-**When** se solicita el triaje HTTP.
+**When** se solicita el triaje HTTP o se ejecuta el comando `triage`.
 
-**Then** debe devolver HTTP 422 Unprocessable Entity.
+**Then** HTTP debe devolver 422 Unprocessable Entity y la CLI debe terminar con código `1`, con el mensaje en `stderr`.
 
 ---
 
@@ -75,7 +75,7 @@ triage --incident-id INC-1001 --raw-text "HTTP 502 Bad Gateway en pasarela de pa
 
 **When** se procesa el incidente desde terminal.
 
-**Then** debe generar una salida JSON válida con `severity="P0"` y `recommended_team="Backend-Core"`.
+**Then** debe generar una salida JSON válida con `severity="P0"` y `recommended_team="Backend-Core"`, y terminar con código `0`.
 
 ```json
 {

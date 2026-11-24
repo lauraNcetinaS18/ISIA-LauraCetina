@@ -36,7 +36,7 @@ obligatorias y derivan de `.specify/memory/constitution.md` y ADR-003.
 - Obtén las dependencias desde `src.adapters.outbound.factory` (inyección por
   constructor); ese es el único punto de acceso permitido al outbound.
 - Garantiza paridad REST/CLI: mismos casos de uso, misma salida JSON y mismos errores
-  (`ValidationError` → HTTP 422 en REST, código de salida 2 en CLI).
+  (`ValidationError` → HTTP 422 en REST, código de salida 1 en CLI, constitución 2.0.0).
 - Un futuro adaptador MCP sigue exactamente la misma regla.
 
 ### `src/adapters/outbound/`

@@ -24,7 +24,7 @@ Habilitar una vista agregada y determinista de incidentes activos (`OPEN`/`IN_PR
 
 **Performance Goals**: 10.000 incidentes con consulta < 2 s (SC-005), verificado por `test_rendimiento_sc_005_repositorio_10k` con el protocolo de `spec.md`; cálculo SLA O(D) según ADR-002
 
-**Constraints**: Dominio sin frameworks/BD/HTTP; aplicación sin adaptadores concretos; inbound nunca importa `sqlite3` ni el repositorio legado; sin ORMs pesados; mapeo `ValidationError` → HTTP 422 / CLI exit 2; salidas y docstrings en español
+**Constraints**: Dominio sin frameworks/BD/HTTP; aplicación sin adaptadores concretos; inbound nunca importa `sqlite3` ni el repositorio legado; sin ORMs pesados; mapeo `ValidationError` → HTTP 422 / CLI exit 1 (constitución 2.0.0); salidas y docstrings en español
 
 **Scale/Scope**: 10.000 registros sintéticos, 2 canales de entrada (REST + CLI), 1 adaptador outbound SQLite inicial
 
@@ -36,7 +36,7 @@ Habilitar una vista agregada y determinista de incidentes activos (`OPEN`/`IN_PR
 |---|---|---|
 | Núcleo determinista en `src/domain/` | PASS | `evaluate_sla_status` sigue siendo la única fuente de `elapsed_minutes`, `is_breached` y escalamiento; `models.py` no se modifica. |
 | Aplicación sin frameworks ni persistencia | PASS | `IncidentService` importa solo dominio y `IncidentRepositoryPort` (`typing.Protocol`); la inyección llega desde `factory.py`. |
-| Inbound delega y mapea errores | PASS | REST y CLI construyen el servicio con el repositorio de la factory, delegando a `get_active_incidents_summary`; `ValidationError` → 422 / exit 2. |
+| Inbound delega y mapea errores | PASS | REST y CLI construyen el servicio con el repositorio de la factory, delegando a `get_active_incidents_summary`; `ValidationError` → 422 / exit 1 (constitución 2.0.0). |
 | Outbound intercambiable por `DATABASE_URL` | PASS | `factory.py` selecciona `SQLiteIncidentRepository`; default `sqlite:///:memory:`; la firma del puerto no expone SQL. |
 | SQLite3 sin ORMs; cambio de motor con ADR | PASS | No se introduce SQLAlchemy ni nuevo motor; no se requiere ADR adicional. |
 | Calidad: Ruff + BDD con `uv` | PASS | Se planifican `[tool.ruff.lint]`, `ruff.toml` jerárquicos y `tests/test_spec_002_summary.py` con `test_bdd_*`, `TestClient`, `CliRunner`, `test_bdd_sqlite_repository_cumple_puerto` y `test_rendimiento_sc_005_repositorio_10k`; los escenarios BDD se escriben antes de su implementación. |

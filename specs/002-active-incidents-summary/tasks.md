@@ -76,7 +76,7 @@ description: "Task list for feature implementation"
 
 **Goal**: Ofrecer el subcomando `summary` con `--component` y `--reference-time` opcionales, devolviendo exactamente la misma estructura JSON que HTTP.
 
-**Independent Test**: Con el mismo conjunto de incidentes y el mismo instante de referencia, comparar campo por campo la salida de `CliRunner` con la respuesta de `TestClient`. La prueba congela el reloj del servicio en HTTP mediante una fixture determinista y pasa el mismo ISO a `--reference-time`; incluye el caso vacío y un `--reference-time` inválido (exit 2).
+**Independent Test**: Con el mismo conjunto de incidentes y el mismo instante de referencia, comparar campo por campo la salida de `CliRunner` con la respuesta de `TestClient`. La prueba congela el reloj del servicio en HTTP mediante una fixture determinista y pasa el mismo ISO a `--reference-time`; incluye el caso vacío y un `--reference-time` inválido (exit 1, constitución 2.0.0).
 
 ### Tests for User Story 2
 
@@ -86,7 +86,7 @@ description: "Task list for feature implementation"
 
 ### Implementation for User Story 2
 
-- [X] T012 [US2] Implementar el subcomando `summary` en `src/adapters/inbound/cli.py` con `--component` y `--reference-time`, delegando en `IncidentService`, parseando ISO 8601, mapeando `ValidationError` a exit 2 y emitiendo `json.dumps(..., ensure_ascii=False)` según `contracts/cli-summary.md`. Sin marcador [P]: depende de que T011 ya haya definido los escenarios BDD. Trazabilidad: FR-001, FR-006, FR-009, FR-012, FR-014, FR-015, SC-003 y SC-007.
+- [X] T012 [US2] Implementar el subcomando `summary` en `src/adapters/inbound/cli.py` con `--component` y `--reference-time`, delegando en `IncidentService`, parseando ISO 8601, mapeando `ValidationError` a exit 1 (constitución 2.0.0) y emitiendo `json.dumps(..., ensure_ascii=False)` según `contracts/cli-summary.md`. Sin marcador [P]: depende de que T011 ya haya definido los escenarios BDD. Trazabilidad: FR-001, FR-006, FR-009, FR-012, FR-014, FR-015, SC-003 y SC-007.
 
 **Checkpoint**: US1 y US2 devuelven estructuras idénticas y son verificables por separado.
 

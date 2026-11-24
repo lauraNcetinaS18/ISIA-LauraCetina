@@ -28,7 +28,7 @@ Se usa `json.dumps(payload, ensure_ascii=False)`, igual que en el comando `triag
 | Código | Situación |
 |---|---|
 | `0` | Resumen generado correctamente (incluso sin incidentes). |
-| `2` | `ValidationError` por `component` vacío, `--reference-time` inválido o error de dominio al evaluar SLA; el mensaje va a `stderr` con prefijo `Error: `. |
+| `1` | `ValidationError` por `component` vacío, `--reference-time` inválido o error de dominio al evaluar SLA; el mensaje va a `stderr` con prefijo `Error: `. Según la constitución 2.0.0. |
 
 ## Paridad REST/CLI
 

@@ -49,7 +49,7 @@ uv run pytest -v tests/test_spec_002_summary.py::test_rendimiento_sc_005_reposit
 | Sin resultados | `test_bdd_resumen_sin_resultados` | Cuerpo exacto de FR-009. |
 | Casos borde y orden | `test_bdd_resumen_casos_borde_sla` | Fin de semana, límite exacto, 75 % y orden determinista (SC-006/SC-008). |
 | Paridad CLI | `test_bdd_resumen_paridad_rest_cli` | Mismo JSON estructural con reloj HTTP congelado e igual `--reference-time`. |
-| `reference_time` inválido | `test_bdd_resumen_reference_time_invalido` | CLI termina con código 2 y mensaje en `stderr`. |
+| `reference_time` inválido | `test_bdd_resumen_reference_time_invalido` | CLI termina con código 1 y mensaje en `stderr` (constitución 2.0.0). |
 | Contrato del puerto | `test_bdd_sqlite_repository_cumple_puerto` | Cinco métodos disponibles y ciclo básico save/get/list/find/health. |
 | Rendimiento SC-005 | `test_rendimiento_sc_005_repositorio_10k` | 10.000 filas aisladas; mediana de tres mediciones < 2 s; no usa el benchmark legado. |
 

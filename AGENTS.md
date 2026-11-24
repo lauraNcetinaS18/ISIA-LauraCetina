@@ -21,7 +21,7 @@
 - `src/domain/sla_calculator.py` owns `SLA_POLICY_TABLE` and all SLA math; `src/domain/triage_rules.py` reads `data/sample_incidents.json`; `src/incident_repository.py` is the only SQLite writer and remains temporarily in `src/`; `src/context_audit.py` is an AST-based LSP *simulator*, not a real LSP client, and globs `src/**/*.py`.
 - SLA (accepted ADR-002): P0/P1 = 24/7; P2/P3 = Mon–Fri 08:00–18:00 only (600 min/day, weekends 0). Breach is `elapsed > max`; escalation requires `status != RESOLVED` and (`is_breached` or `elapsed >= 75%`) and stays on after breach. No holidays/timezones; keep SLA math stdlib-only and O(D).
 - Triage: classify by real impact, never by words like `hoy`/`urgente` — INC-1002→P2, INC-1007→P1, INC-1009→P2; HTTP 502 in the payments gateway → P0 and `payments-gateway:http-502-outage`. Teams are only `Backend-Core`, `Platform-SRE`, `Data-DBA`, `Security-IAM`; duplicate key is `<component>:<symptom_category>`.
-- No adapter reimplements severity, team or duplicate rules; REST and CLI delegate to `IncidentService` and map `ValidationError` to HTTP 422 / CLI exit 2.
+- No adapter reimplements severity, team or duplicate rules; REST and CLI delegate to `IncidentService` and map `ValidationError` to HTTP 422 / CLI exit 1 (constitution 2.0.0).
 - Code/docstrings/console output are in Spanish; preserve that style.
 
 ## Docs quirks

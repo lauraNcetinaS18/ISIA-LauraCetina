@@ -101,8 +101,8 @@ El `JOIN` evita el N+1 y garantiza política existente; el cálculo de SLA ocurr
 
 | Entrada | Validación | Error |
 |---|---|---|
-| `component` (REST/CLI) | Opcional; si llega, no vacío después de `strip()` | `ValidationError` → HTTP 422 / CLI exit 2 |
-| `reference_time` (CLI) | Opcional; ISO 8601 parseable por `datetime.fromisoformat` | `ValidationError` → CLI exit 2 |
+| `component` (REST/CLI) | Opcional; si llega, no vacío después de `strip()` | `ValidationError` → HTTP 422 / CLI exit 1 (constitución 2.0.0) |
+| `reference_time` (CLI) | Opcional; ISO 8601 parseable por `datetime.fromisoformat` | `ValidationError` → CLI exit 1 (constitución 2.0.0) |
 | `reference_time` (servicio) | Si es `None`, `datetime.now()` una vez por llamada | — |
 | `created_at > reference_time` | Lo rechaza el dominio al evaluar SLA | `ValueError` propagado y mapeado por el adaptador |
 | `DATABASE_URL` | Debe empezar con `sqlite:///` en H002 | Error explícito de configuración en la factory |
